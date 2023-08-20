@@ -20,13 +20,14 @@ RUN apt-get -y --no-install-recommends install \
         libgtk-4-dev \
         llvm-dev \
         libclang-dev \
-        clang
+        clang \
+        hyperfine
 
 # Fetch z3 and install
 RUN wget https://github.com/Z3Prover/z3/releases/download/z3-4.12.1/z3-4.12.1-x64-glibc-2.35.zip && \
     unzip z3-4.12.1-x64-glibc-2.35.zip && \
     cp ./z3-4.12.1-x64-glibc-2.35/bin/z3 /usr/bin/z3 ; \
-    cp ./z3-4.12.1-x64-glibc-2.35/lib/libz3.so /usr/lib/libz3.so ; \
+    cp ./z3-4.12.1-x64-glibc-2.35/bin/libz3.so /usr/lib/libz3.so ; \
     cp ./z3-4.12.1-x64-glibc-2.35/bin/libz3.a /usr/lib/libz3.a ; \
     cp ./z3-4.12.1-x64-glibc-2.35/include/z3* /usr/include/
 
