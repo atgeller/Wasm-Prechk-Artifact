@@ -57,20 +57,22 @@ ENV no_checks=${HOME_DIR}/no_checks
 ENV tools=${HOME_DIR}/wasm-tools
 ENV polybench=${HOME_DIR}/PolyBenchC-4.2.1
 WORKDIR ${HOME_DIR}
-RUN git clone --recursive -b wasm-prechk https://github.com/atgeller/wasmtime wasmtime
-RUN git clone --recursive -b no-checks https://github.com/atgeller/wasmtime no_checks
-RUN git clone --recursive -b prove-z3 https://github.com/atgeller/wasm-tools wasm-tools
+RUN git clone --recursive --depth 1 --branch popl2023 https://github.com/atgeller/wasmtime wasmtime
+RUN git clone --recursive --depth 1 --branch popl2023-no-checks https://github.com/atgeller/wasmtime no_checks
+RUN git clone --recursive --depth 1 --branch popl2023 https://github.com/atgeller/wasm-tools wasm-tools
 RUN git clone --recursive https://github.com/atgeller/PolyBenchC-4.2.1 PolyBenchC-4.2.1
 
 # Build projects
 WORKDIR ${wasmtime}
-RUN git fetch --all --tags && git checkout tags/popl2023
-RUN cargo build --release
+#RUN git fetch --all --tags && git checkout tags/popl2023
+RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
 WORKDIR ${no_checks}
-RUN git fetch --all --tags && git checkout tags/popl2023
-RUN cargo build --release
+#RUN git fetch --all --tags && git checkout tags/popl2023-no-checks
+RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
 WORKDIR ${tools}
-RUN git fetch --all --tags && git checkout tags/popl2023
-RUN cargo build --release
+#RUN git fetch --all --tags && git checkout tags/popl2023
+RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
 
+# Set working directory for entry
 WORKDIR ${polybench}
+
