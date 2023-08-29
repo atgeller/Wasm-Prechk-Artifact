@@ -10,6 +10,7 @@ RUN apt-get -y --no-install-recommends install \
         curl \
         default-jdk \
         python3 \
+        python3-pip \
         python3-setuptools \
         python-is-python3 \
         sudo \
@@ -46,6 +47,10 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN cargo --version
 RUN rustup toolchain list
 
+# Install python libraries
+RUN pip install numpy scipy pandas matplotlib
+
+# Download software artifacts
 ENV HOME_DIR=/root
 ENV wasmtime=${HOME_DIR}/wasmtime
 ENV no_checks=${HOME_DIR}/no_checks
