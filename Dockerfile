@@ -64,15 +64,13 @@ RUN git clone --recursive --depth 1 --branch popl2023 https://github.com/atgelle
 
 # Build projects
 WORKDIR ${wasmtime}
-#RUN git fetch --all --tags && git checkout tags/popl2023
 RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
 WORKDIR ${no_checks}
-#RUN git fetch --all --tags && git checkout tags/popl2023-no-checks
 RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
 WORKDIR ${tools}
-#RUN git fetch --all --tags && git checkout tags/popl2023
 RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
 
 # Set working directory for entry
 WORKDIR ${polybench}
-
+# Initialize folders scripts rely on being present
+RUN mkdir run_time ; mkdir compile_time ; mkdir validation_time
