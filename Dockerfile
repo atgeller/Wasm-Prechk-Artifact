@@ -60,7 +60,7 @@ WORKDIR ${HOME_DIR}
 RUN git clone --recursive --depth 1 --branch popl2023 https://github.com/atgeller/wasmtime wasmtime
 RUN git clone --recursive --depth 1 --branch popl2023-no-checks https://github.com/atgeller/wasmtime no_checks
 RUN git clone --recursive --depth 1 --branch popl2023 https://github.com/atgeller/wasm-tools wasm-tools
-RUN git clone --recursive https://github.com/atgeller/PolyBenchC-4.2.1 PolyBenchC-4.2.1
+RUN git clone --recursive --depth 1 --branch popl2023 https://github.com/atgeller/PolyBenchC-4.2.1 PolyBenchC-4.2.1
 
 # Build projects
 WORKDIR ${wasmtime}
