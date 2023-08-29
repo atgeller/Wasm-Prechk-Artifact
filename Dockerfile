@@ -1,5 +1,5 @@
 ARG DEBIAN_FRONTEND=noninteractive
-FROM ubuntu:latest
+FROM ubuntu:jammy
 
 RUN apt-get update -y
 RUN TZ=Etc/UTC apt-get -y install tzdata
