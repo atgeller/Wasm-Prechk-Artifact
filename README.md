@@ -13,3 +13,7 @@ Contains software artifacts, benchmarks, and a dockerfile for Wasm-prechk
     * `./utilities/measure_sizes.sh`
     These will each produce a csv file with the name based on the script.
     For example, `measure_run_time.sh` will produce `run_time.csv`.
+ 6. To generate the relative run-time graph as it appeared in the paper:
+    * Use `python3 ./utilities/relative.py` to generate the relative data, and
+    * Use `python3 ./utilities/make_run_time_graph_relative.py` to generate the graph.
+    The graph will then be available as an svg: `run_time_relative.svg`.
