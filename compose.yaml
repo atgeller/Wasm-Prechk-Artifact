@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  wasm-prechk:
+    build: .
+    image: wasm-prechk
+    container_name: wasm-prechk    
+    volumes: 
+      - ./:/app/workspace
+    stdin_open: true
+    tty: true
+
