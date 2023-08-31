@@ -13,3 +13,11 @@ Contains software artifacts, benchmarks, and a dockerfile for Wasm-prechk
     * `./utilities/measure_sizes.sh`
     These will each produce a csv file with the name based on the script.
     For example, `measure_run_time.sh` will produce `run_time.csv`.
+ 6. Generate the relative run-time graph as it appeared in the paper:
+    * Use `python3 ./utilities/relative.py` to generate the relative data, and
+    * Use `python3 ./utilities/make_run_time_graph_relative.py` to generate the graph.
+    The graph will then be available as an svg: `run_time_relative.svg`.
+ 7. Copy the results to the mounted directory so they are accessible outside the Docker image (they will be located in the same folder as the Dockerfile).
+    * Copy the csv files produced in Step 5 using the following command `cp *.csv /app/workspace`
+      This will provide `run_time.csv`, `run_time_relative.csv`, `validation_time.csv`, `compile_time.csv`, and `sizes.csv`.
+    * Copy the svg produced in Step 6 `cp *.svg /app/workspace`
