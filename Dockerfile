@@ -57,10 +57,10 @@ ENV no_checks=${HOME_DIR}/no_checks
 ENV tools=${HOME_DIR}/wasm-tools
 ENV polybench=${HOME_DIR}/PolyBenchC-4.2.1
 WORKDIR ${HOME_DIR}
-RUN git clone --recursive --depth 1 --branch popl2023 https://github.com/atgeller/wasmtime wasmtime
-RUN git clone --recursive --depth 1 --branch popl2023-no-checks https://github.com/atgeller/wasmtime no_checks
-RUN git clone --recursive --depth 1 --branch popl2023 https://github.com/atgeller/wasm-tools wasm-tools
-RUN git clone --recursive --depth 1 --branch popl2023 https://github.com/atgeller/PolyBenchC-4.2.1 PolyBenchC-4.2.1
+RUN git clone --recursive --depth 1 --branch prechk-v1.0 https://github.com/atgeller/wasmtime wasmtime
+RUN git clone --recursive --depth 1 --branch no-checks-v1.0 https://github.com/atgeller/wasmtime no_checks
+RUN git clone --recursive --depth 1 --branch prechk-v1.0 https://github.com/atgeller/wasm-tools wasm-tools
+RUN git clone --recursive --depth 1 --branch prechk-v1.0 https://github.com/atgeller/PolyBenchC-4.2.1 PolyBenchC-4.2.1
 
 # Build projects
 WORKDIR ${wasmtime}
