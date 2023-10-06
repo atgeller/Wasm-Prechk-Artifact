@@ -55,10 +55,10 @@ The comparison shows that our implementation, Wasm-prechk, gets an average speed
 Below are instructions to generate the raw data and graph, but first, a few important disclaimers.
 
 ### Important Disclaimers
-- The reviewers asked us to add a 4th configuration, wasm_vm, that is the default configuration of wasmtime when it is possible to use virtual memory guard pages. This does not appear in the paper, but a graph we submitted to the reviewers is available at `~/data/run_time_relative.pdf`.
+- The reviewers asked us to add a 4th configuration, wasm_vm, that is the default configuration of wasmtime when it is possible to use virtual memory guard pages. This does not appear in the reviewed version of the paper, but will appear in the final version, and a draft graph submitted to the reviewers is available at `~/data/run_time_relative.pdf`.
 - As a result of the above change, the 100% line was renamed from wasm to wasm_dyn.
-- Two polybench benchmarks are missing from the graph in the paper due to a script error. Our results for those benchmarks are also available in `~/data/run_time_relative.pdf`.
-- The results may fluctuate, especially for shorter lived benchmarks. The better the machine, the larger the speed-ups usually (as one may expect). The specs of the machine we used to run the benchmark, as well as various over environmental factors, can be found in the paper (lines 952-957).
+- Two polybench benchmarks are missing from the graph in the paper due to a script error, which will be corrected in the final version. Our results for those benchmarks are also available in `~/data/run_time_relative.pdf`.
+- The results may fluctuate, especially for shorter lived benchmarks. The specs of the machine we used to run the benchmark, as well as various over environmental factors, can be found in the paper (lines 952-957).
 
 ### Instructions
 The folder `run_time` must be present in `~/PolybenchC-4.2.1` for the scripts to work.
@@ -69,7 +69,7 @@ It is recommended to delete `run_time.csv` and `run_time_relative.csv` each time
 4. Use `python3 ./utilities/relative.py` to generate the relative data in `run_time_relative.csv`. This should execute very quickly.
 5. Finally, use `python3 ./utilities/make_run_time_graph_relative.py` to generate the graph. The graph will then be available as an pdf: `run_time_relative.pdf`. This should execute very quickly.
 
-Note: In `run_time.csv`, `mean1` and `sem1` correspond to Wasm-prechk, `mean2` and `sem2` to wasm_no_checks, `mean3` and `sem3` to wasm with dynamic checks (wasm_dyn), and `mean4` and `sem4` to the default wasm configuration wasm_vm.
+Note: In `run_time.csv`, `mean1` and `sem1` correspond to Wasm-prechk, `mean2` and `sem2` to wasm\_no\_checks, `mean3` and `sem3` to wasm with dynamic checks (wasm_dyn), and `mean4` and `sem4` to the default wasm configuration wasm\_vm.
 
 ## Type Checking Cost Analysis
 Table 1 shows the raw data of the over head of typechecking using wasm-prechk.
@@ -92,7 +92,12 @@ The validation and compilation times may vary, perhaps significantly depending o
 Access the Dockerfile and compose.yaml from https://github.com/atgeller/Wasm-Prechk-Artifact.
 
 ### Virtual Box
-TODO
+First, you need to build or download `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly-disk001.vmdk` to the same directory as 
+`POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf`.
+
+An image can be downloaded from TODO.
+
+Alternatively, run `make-virtualbox.sh` to build a new image. This builds the Virtual Box image from the Docker image, and so requires a Docker.
 
 ## Installation
 ### Docker
@@ -100,11 +105,6 @@ TODO
  2. Run the docker image interactively using `docker-compose run wasm-prechk`.
 
 ### VirtualBox
-First, you need to build or download `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly-disk001.vmdk` to the same directory as 
-`POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf`.
-
-Run `make-virtualbox.sh` to build a new image; an image can be downloaded from TODO.
-
 1. Import `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` into VirtualBox using "Import Appliance".
 2. Start the virtual machine, and login using username `root` and password `root`.
    - The root password can be changed by modifying the `make-virtualbox.sh` script when generating the image.
