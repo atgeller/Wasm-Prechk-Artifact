@@ -54,11 +54,13 @@ RUN pip install numpy scipy pandas matplotlib
 ENV HOME_DIR=/root
 ENV wasmtime=${HOME_DIR}/wasmtime
 ENV no_checks=${HOME_DIR}/no_checks
+ENV vm_guards=${HOME_DIR}/vm_guards
 ENV tools=${HOME_DIR}/wasm-tools
 ENV polybench=${HOME_DIR}/PolyBenchC-4.2.1
 WORKDIR ${HOME_DIR}
 RUN git clone --recursive --depth 1 --branch prechk-v1.0 https://github.com/atgeller/wasmtime wasmtime
 RUN git clone --recursive --depth 1 --branch no-checks-v1.0 https://github.com/atgeller/wasmtime no_checks
+RUN git clone --recursive --depth 1 --branch v5.0.1 https://github.com/atgeller/wasmtime vm_guards
 RUN git clone --recursive --depth 1 --branch prechk-v1.0 https://github.com/atgeller/wasm-tools wasm-tools
 RUN git clone --recursive --depth 1 --branch prechk-v1.0 https://github.com/atgeller/PolyBenchC-4.2.1 PolyBenchC-4.2.1
 
@@ -66,6 +68,8 @@ RUN git clone --recursive --depth 1 --branch prechk-v1.0 https://github.com/atge
 WORKDIR ${wasmtime}
 RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
 WORKDIR ${no_checks}
+RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
+WORKDIR ${vm_guards}
 RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
 WORKDIR ${tools}
 RUN cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release
