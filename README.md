@@ -51,7 +51,7 @@ For example, the first entry, `./datamining/correlation/correlation.c`, will hav
 
 ## Run-time Performance Analysis (Section 6.2)
 Figure 6 shows a relative run-time performance comparison between several configurations of wasmtime.
-The comparison shows that our implementation, Wasm-prechk, gets an average speedup of 1.72x over wasm with only dynamic checks, and that wasm-no_checks, an unsafe version that disables all checks, gets an average speedup of 1.76x.
+The comparison shows that our implementation, Wasm-prechk, gets an average speedup of 1.71x over wasm with only dynamic checks (line 965), and that wasm-no_checks, an unsafe version that disables all checks, gets an average speedup of 1.76x (line 960).
 Below are instructions to generate the raw data and graph, but first, a few important disclaimers.
 
 ### Important Disclaimers
