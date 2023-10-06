@@ -1,12 +1,24 @@
 # Wasm-Prechk-Artifact
 Contains software artifacts, benchmarks, and a dockerfile for Wasm-prechk
 
-## Getting started
+## Docker
  1. Build the dockerfile using `docker-compose build` (this will likely take a while, around half an hour, especially on less beefy machines).
  2. Run the docker image interactively using `docker-compose run wasm-prechk`.
- 3. You should start in the correct directory `~/PolyBenchC-4.2.1`.
- 4. Use `~/wasmtime/target/release/wasmtime --version`, `~/no_checks/target/release/wasmtime --version`, and `~/wasm-tools/target/release/wasmtime --version` to ensure the software artifacts were built correctly.
- 5. Use the scripts to generate csv files with experiment data (running all 4 should take a few hours, beefy machine recommended):
+
+## VirtualBox
+First, you need to build or download `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly-disk001.vmdk` to the same directory as 
+`POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf`.
+
+Run `make-virtualbox.sh` to build a new image; an image can be downloaded from TODO.
+
+1. Import `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` into VirtualBox using "Import Appliance".
+2. Start the virtual machine, and login using username `root` and password `root`.
+   - The root password can be changed by modifying the `make-virtualbox.sh` script when generating the image.
+
+## Using the artifact
+ 1. You should start in the correct directory `~/PolyBenchC-4.2.1`.
+ 2. Use `~/wasmtime/target/release/wasmtime --version`, `~/no_checks/target/release/wasmtime --version`, and `~/wasm-tools/target/release/wasmtime --version` to ensure the software artifacts were built correctly.
+ 3. Use the scripts to generate csv files with experiment data (running all 4 should take a few hours, beefy machine recommended):
     * `./utilities/measure_run_time.sh`
     * `./utilities/measure_compile_time.sh`
     * `./utilities/measure_validation_time.sh`
