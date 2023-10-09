@@ -99,6 +99,9 @@ An image can be downloaded from TODO.
 
 Alternatively, run `make-virtualbox.sh` to build a new image. This builds the Virtual Box image from the Docker image, and so requires a Docker.
 
+### Other Files
+The appendix is available in `appendix.pdf`, and raw data is available under the `data` folder in the https://github.com/atgeller/Wasm-Prechk-Artifact repository.
+
 ## Installation
 ### Docker
  1. Build the dockerfile using `docker-compose build` (this will likely take a while, around half an hour, especially on less beefy machines).
@@ -110,29 +113,30 @@ Alternatively, run `make-virtualbox.sh` to build a new image. This builds the Vi
    - The root password can be changed by modifying the `make-virtualbox.sh` script when generating the image.
 
 ## Sanity testsing
-To sanity check that the pre-loaded software artifacts work properly, try running the following commands:
+To sanity check that the pre-loaded software artifacts work properly, try running the following commands (from within the VM/Docker image):
 * `~/wasmtime/target/release/wasmtime --version`
-* `~/vm_guards/target/release/wasmtime --version`
+* `~/vmguards/target/release/wasmtime --version`
 * `~/no_checks/target/release/wasmtime --version`
 They should all succeed.
 
+To ensure the redex model works properly, run `raco test` from inside the redex model folder (`~/wasm-prechk`), it should succeed silently.
+
 # Evaluation Instructions
 Evaluation instructions for each claim are inlined in the list of claims.
+
+Each of the following usage instructions are from within the VM/Docker image.
 
 To use our implementation of wasm-prechk, you can invoke `~/wasmtime/target/release/wasmtime <wasm file>`, where `<wasm file>` is a wasm module in text or binary format.
 Alternatively, you can precompile wasm code using `~/wasmtime/target/release/wasmtime --allow-precompiled <wasm file> -o <output file name>.cwasm`, and then execute the precompiled code using `~/wasmtime/target/release/wasmtime --allow-precompiled <output file name>.cwasm`.
 
 To typecheck a wasm module, you can use our implementation of wasm-tools: `~/wasm-tools/target/release/wasm-tools validate <wasm file>`.
 
-You can test both the typechecker (wasm-tools) and compiler/runtime (wasmtime) on the example program `~/wasmtime/tests/wasm-prechk/bubblesort_stripped.wat`, which implements a prechecked version of bubblesort, compiled from C, within Wasm-prechk.
-You should notice that if you change the annotations to constraints which no longer hold, you will receive a typechecking error.
-
 # Artifact Layout
 ## Appendix
-The appendix is available in `~/appendix.pdf`, it mostly contains proof details, as well as some additional typing rules, and experimental details.
+The appendix is available in `appendix.pdf` as part of this repository (outside the VM), it mostly contains proof details, as well as some additional typing rules, and experimental details.
 
 ### Our Results for Comparison
-Raw data is available under the `~/data/` folder.
+Raw data is available under the `data` folder as part of this repository (outside the VM).
 It should contain a version of every file that will be generated while reproducing the experiments, for comparison:
 - `run_time.csv` contains the raw data on how long each benchmark takes to run.
 - `run_time_relative.csv` contains data on how long each benchmark takes to run using different configurations compared to the configuration with dynamic checks.
@@ -145,8 +149,8 @@ It should contain a version of every file that will be generated while reproduci
 To reiterate.
 The reviewers asked us to add a 4th configuration, wasm_vm, that is the default configuration of wasmtime when it is possible to use virtual memory guard pages.
 As a result, the 100% line was renamed from wasm to wasm_dyn.
-These changes do not appear in the paper, but is contained in a version of the graph that we submitted to the reviewers, which is the graph in `~/data/run_time_relative.pdf`.
-The graph from the paper is `~/data/run_time_relative_paper.pdf`.
+These changes do not appear in the paper, but is contained in a version of the graph that we submitted to the reviewers, which is the graph in `data/run_time_relative.pdf`.
+The graph from the paper is `data/run_time_relative_paper.pdf`.
 Two polybench benchmarks are missing from the graph in the paper due to a script error.
 Our results for those benchmarks are present in the raw run time data.
 
@@ -166,3 +170,4 @@ It is also modified not to use any memory guard pages.
 
 ## Other Notes
 The folders `run_time`, `compile_time`, and `validation_time` must be present in `~/PolybenchC-4.2.1` for the scripts to work.
+The VM/Docker image should have these folders present, but if they are not then the scripts will fail.
