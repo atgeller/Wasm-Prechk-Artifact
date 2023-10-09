@@ -92,11 +92,9 @@ The validation and compilation times may vary, perhaps significantly depending o
 Access the Dockerfile and compose.yaml from https://github.com/atgeller/Wasm-Prechk-Artifact.
 
 ### Virtual Box
-First, you need to build or download `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly-disk001.vmdk` to the same directory as 
-`POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf`.
+First, you need to build or download `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` to the same directory as `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf`.
 
-An image can be downloaded from https://doi.org/10.5281/zenodo.8423072.
-Note that you will need to rename the downloaded image from `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` to `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly-disk001.vmdk` (spaces weren't allowed when uploading).
+The image `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` is available as part of this archive.
 
 Alternatively, run `make-virtualbox.sh` to build a new image. This builds the Virtual Box image from the Docker image, and so requires a Docker.
 
