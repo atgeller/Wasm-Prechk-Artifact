@@ -159,13 +159,13 @@ All data in the paper is intact in the run time results provided here.
 This disclaimer does not apply to the sizes, validation times, or compilation times.
 
 ## Software artifacts
-- `~\wasmtime` contains our implementation of wasm-prechk on top of wasmtime.
+- `~/wasmtime` contains our implementation of wasm-prechk on top of wasmtime.
 It is also modified not to use any memory guard pages.
-- `~\no_checks` contains the configuration of wasmtime modified to produce no dynamic checks.
-- `~\vm_guards` contains the unmodified version of wasmtime.
-- `~\wasm-tools` contains our implementation of the wasm-prechk parser and typechecker.
-- `~\wasm-prechk` contains our redex model of wasm-prechk.
-- `~\PolybenchC-4.2.1` contains the benchmark suite, including scripts to generate the evaluation data, the version of wasm modules with annotations and manual checks added for each benchmark, and the unmodified wasm modules for each benchmark.
+- `~/no_checks` contains the configuration of wasmtime modified to produce no dynamic checks.
+- `~/vm_guards` contains the unmodified version of wasmtime.
+- `~/wasm-tools` contains our implementation of the wasm-prechk parser and typechecker.
+- `~/wasm-prechk` contains our redex model of wasm-prechk.
+- `~/PolybenchC-4.2.1` contains the benchmark suite, including scripts to generate the evaluation data, the version of wasm modules with annotations and manual checks added for each benchmark, and the unmodified wasm modules for each benchmark.
 
 ## Other Notes
 The folders `run_time`, `compile_time`, and `validation_time` must be present in `~/PolybenchC-4.2.1` for the scripts to work.
