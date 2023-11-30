@@ -48,7 +48,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # Install rust
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /rustup-init.sh
 RUN chmod +x /rustup-init.sh
-RUN /rustup-init.sh -y --profile minimal --default-toolchain nightly-2023-03-31
+RUN /rustup-init.sh -y --profile minimal --default-toolchain nightly-2023-03-31-x86_64-unknown-linux-gnu
 RUN rustup toolchain list
 
 # Install python libraries
