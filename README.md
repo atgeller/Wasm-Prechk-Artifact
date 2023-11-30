@@ -1,9 +1,9 @@
 # Artifact Layout
 ## Appendix
-The appendix is available in `appendix.pdf` as part of this repository (outside the VM), it mostly contains proof details, as well as some additional typing rules, and experimental details.
+The appendix is available in `appendix.pdf` as part of this package (outside the VM), it mostly contains proof details, as well as some additional typing rules, and experimental details.
 
 ### Our Results for Comparison
-Raw data is available under the `data` folder as part of this repository (outside the VM).
+Raw data is available under the `data` folder as part of this package (outside the VM).
 It should contain a version of every file that will be generated while reproducing the experiments, for comparison:
 - `run_time.csv` contains the raw data on how long each benchmark takes to run.
 - `run_time_relative.csv` contains data on how long each benchmark takes to run using different configurations compared to the configuration with dynamic checks.
@@ -32,32 +32,32 @@ The VM/Docker image should have these folders present, but if they are not then 
 Use Dockerfile and compose.yaml, included as part of this artifact.
 
 ### Virtual Box
-First, you need to build or download `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` to the same directory as `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf`.
-
-The image `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` is available as part of this archive.
+The files `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` and `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` provide a VM image for VirtualBox, they are available as part of this package, or can be built from the dockerfile (see below).
 
 Alternatively, run `make-virtualbox.sh` to build a new image. This builds the Virtual Box image from the Docker image, and so requires a Docker.
 
 ### Locally
-The artifact should work on any Ubuntu machine (including a fresh virtual machine image), full installation instructions are provided below.
+The artifact should work on any ubuntu:jammy machine (including a fresh virtual machine image), full installation instructions are provided below.
 
-All software artifacts are available under the following repos (the tags provided are the proper versions). The relevant commands to download them are provided as part of the installation instructions below. It's important to make sure these go into the right directories, so make sure you start in your local home directory `~` when running these commands.
+All software artifacts are available as part of this package. It's important to make sure these go into the right directories, so make sure you start in your local home directory `~` when running these commands.
 
+In addition to the versions in this package. The artifacts are also available on git with the relevant tags for the versions supplied here.
 * Our instrumented version of wasmtime is available at `https://github.com/atgeller/wasmtime`. The `prechk-v1.0`, `no-checks-v1.0`, and `v5.0.0` tags contain relevant configurations used in the experiments.
 * Our instrumented version of the wasm-tools toolset, including the parser and typechecker, is available at `https://github.com/atgeller/wasm-tools`, use the `prechk-v1.0` tag.
 * Our annotated version of the PolyBenchC benchmark suite is available at `https://github.com/atgeller/PolyBenchC-4.2.1`, use the `prechk-v1.1` tag.
 * The redex model is available at `https://github.com/atgeller/wasm-prechk`, use the `prechk-v1.2` tag.
 
 ### Other Files
-The appendix is available in `appendix.pdf`, and raw data is available under the `data` folder in this repository.
+The appendix is available in `appendix.pdf`, and raw data is available under the `data` folder in this package.
 
 ## Installation
 ### Docker
-Known to work with Docker version 4.22, and likely to work with newer versions.
- 1. Build the dockerfile using `docker-compose build` (this will likely take a while, around half an hour, especially on less beefy machines).
+Known to work with at least Docker version 4.22
+ 1. Build the dockerfile provided with this package using `docker-compose build` (this will likely take a while, around half an hour, especially on less beefy machines).
  2. Run the docker image interactively using `docker-compose run wasm-prechk`.
 
 ### VirtualBox
+Known to work with at least Virtualbox 7.0.10
 1. Import `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` into VirtualBox using "Import Appliance".
 2. Start the virtual machine, and login using username `root` and password `root`.
    - The root password can be changed by modifying the `make-virtualbox.sh` script when generating the image.
@@ -120,7 +120,18 @@ Afterwards, running rustup toolchain list should should the relevant toolchain.
 
 You may need to add cargo to your path. Try `cargo --version`, and add cargo to your path if it fails.
 
-4. Download sources
+4. Copy sources
+
+Make sure to place the following folders in your root directory, `~`:
+* wasmtime
+* no_checks
+* vmguards
+* wasm-tools
+* PolyBenchC-4.2.1
+
+The folder wasm-prechk can be used from anywhere on your machine.
+
+4. (OPTIONAL) Download sources from github instead
 
 It's important to make sure these go into the right directories, so make sure you start in your local home directory ~ when running these commands.
 
@@ -218,7 +229,7 @@ The comparison shows that our implementation, Wasm-prechk, gets an average speed
 Below are instructions to generate the raw data and graph, but first, some important notes.
 
 ### Important Notes
-- The results may fluctuate, especially for shorter lived benchmarks. The specs of the machine we used to run the benchmark, as well as various over environmental factors, can be found in the paper.
+- The results may fluctuate, especially for shorter lived benchmarks. The specs of the machine we used to run the benchmark, as well as various other environmental factors, can be found in the paper.
 - In case running all the benchmarks at once is an issue, modified instructions are provided to run the benchmarks in arbitrary pieces.
 
 ## Selecting benchmarks to run
@@ -228,7 +239,7 @@ To run the entire benchmark suite in pieces, following the instructions below, b
 
 ### Instructions
 The folder `run_time` must be present in `~/PolybenchC-4.2.1` for the scripts to work.
-It is recommended to delete `run_time.csv` and `run_time_relative.csv` each time before re-running the script.
+It is recommended to delete/rename `run_time.csv` and `run_time_relative.csv` each time before re-running the script.
 1. Navigate to `~/PolybenchC-4.2.1`.
 2. Invoke the script that will measure the run-times `./utilities/measure_run_time.sh`. This will probably take a few hours to complete (it took about 4 hours on the machine we used, the specs of which can be found in the paper, lines 952-957).
 3. The raw data is now available in `run_time.csv`.
