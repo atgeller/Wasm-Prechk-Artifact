@@ -46,7 +46,7 @@ The VM/Docker image should have these folders present, but if they are not then 
 Use Dockerfile and compose.yaml, included as part of this artifact.
 
 ### Virtual Box
-The files `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` and `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` provide a VM image for VirtualBox, they are available as part of this package, they can be built from the dockerfile (see below), and they are accessible through zenodo: TODO.
+The files `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` and `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` provide a VM image for VirtualBox, they are available as part of this package, they can be built from the dockerfile (see below), and they are accessible through zenodo: https://doi.org/10.5281/zenodo.10242132.
 
 Alternatively, run `make-virtualbox.sh` to build a new image. This builds the Virtual Box image from the Docker image, and so requires a Docker.
 
