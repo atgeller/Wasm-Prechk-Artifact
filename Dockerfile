@@ -52,7 +52,7 @@ RUN /rustup-init.sh -y --profile minimal --default-toolchain nightly-2023-03-31-
 RUN rustup toolchain list
 
 # Install python libraries
-RUN pip install numpy scipy pandas matplotlib
+RUN pip install numpy scipy pandas matplotlib uncertainties
 
 # Download software artifacts
 ENV wasmtime=/root/wasmtime

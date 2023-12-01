@@ -13,13 +13,27 @@ It should contain a version of every file that will be generated while reproduci
 - `compile_time.csv` contains raw data on how long it takes to compile each benchmark using wasmtime.
 
 ## Software artifacts
-- `~/wasmtime` contains our implementation of wasm-prechk on top of wasmtime.
+- The `wasmtime` folder contains our implementation of wasm-prechk on top of wasmtime.
 It is also modified not to use any memory guard pages.
-- `~/no_checks` contains the configuration of wasmtime modified to produce no dynamic checks.
-- `~/vm_guards` contains the unmodified version of wasmtime.
-- `~/wasm-tools` contains our implementation of the wasm-prechk parser and typechecker.
-- `~/wasm-prechk` contains our redex model of wasm-prechk.
-- `~/PolybenchC-4.2.1` contains the benchmark suite, including scripts to generate the evaluation data, the version of wasm modules with annotations and manual checks added for each benchmark, and the unmodified wasm modules for each benchmark.
+- The `no_checks` folder contains the configuration of wasmtime modified to produce no dynamic checks.
+- The `vm_guards` folder contains the unmodified version of wasmtime.
+- The `wasm-tools` folder contains our implementation of the wasm-prechk parser and typechecker.
+- The `wasm-prechk` folder contains our redex model of wasm-prechk.
+- The `PolybenchC-4.2.1` folder contains the benchmark suite, including scripts to generate the evaluation data, the version of wasm modules with annotations and manual checks added for each benchmark, and the unmodified wasm modules for each benchmark.
+
+### Repositories
+All of the software artifacts, and the data and dockerfile, are available via git.
+For the software artifacts, the tags below show the versions used to originally run the experiments.
+For the data and dockerfile, the tag is the version this package was based on, but later versions may contain bug fixes, or support new platforms, check out release notes on newer releases for more information.
+- Our instrumented version of `wasmtime` is available at https://github.com/atgeller/wasmtime/releases/tag/prechk-v1.0, the version here is tag `prechk-v1.0`.
+- `no_checks` is available at https://github.com/atgeller/wasmtime/releases/tag/no-checks-v1.0, the version here is tag `no-checks-v1.0`
+- What we call `vm_guards` corresponds to wasmtime version 5.0.0, it is available at https://github.com/bytecodealliance/wasmtime/releases/tag/v5.0.0.
+- Our instrumented version of `wasm-tools` is available at https://github.com/atgeller/wasm-tools/releases/tag/prechk-v1.0, the version here is tag `prechk-v1.0`.
+- Our annotated PolyBenchC benchmarks are available at https://github.com/atgeller/PolyBenchC-4.2.1/releases/tag/prechk-v1.1, the version here is tag `prechk-v1.1`.
+- The redex model `wasm-prechk` is available at https://github.com/atgeller/wasm-prechk/releases/tags/prechk-v1.2, the version here is tag `prechk-v1.2`.
+- Finally, this readme and the docker files are available at https://github.com/atgeller/wasm-prechk-artifact/releases/tags/prechk-v1.2, the version here is tag `prechk-v1.2`, but newer versions may contain better support for running the above artifacts.
+
+The VM image is available on Zenodo.
 
 ## Other Notes
 The folders `run_time`, `compile_time`, and `validation_time` must be present in `~/PolybenchC-4.2.1` for the scripts to work.
@@ -32,7 +46,7 @@ The VM/Docker image should have these folders present, but if they are not then 
 Use Dockerfile and compose.yaml, included as part of this artifact.
 
 ### Virtual Box
-The files `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` and `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` provide a VM image for VirtualBox, they are available as part of this package, or can be built from the dockerfile (see below).
+The files `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` and `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` provide a VM image for VirtualBox, they are available as part of this package, they can be built from the dockerfile (see below), and they are accessible through zenodo: TODO.
 
 Alternatively, run `make-virtualbox.sh` to build a new image. This builds the Virtual Box image from the Docker image, and so requires a Docker.
 
@@ -40,12 +54,6 @@ Alternatively, run `make-virtualbox.sh` to build a new image. This builds the Vi
 The artifact should work on any ubuntu:jammy machine (including a fresh virtual machine image), full installation instructions are provided below.
 
 All software artifacts are available as part of this package. It's important to make sure these go into the right directories, so make sure you start in your local home directory `~` when running these commands.
-
-In addition to the versions in this package. The artifacts are also available on git with the relevant tags for the versions supplied here.
-* Our instrumented version of wasmtime is available at `https://github.com/atgeller/wasmtime`. The `prechk-v1.0`, `no-checks-v1.0`, and `v5.0.0` tags contain relevant configurations used in the experiments.
-* Our instrumented version of the wasm-tools toolset, including the parser and typechecker, is available at `https://github.com/atgeller/wasm-tools`, use the `prechk-v1.0` tag.
-* Our annotated version of the PolyBenchC benchmark suite is available at `https://github.com/atgeller/PolyBenchC-4.2.1`, use the `prechk-v1.1` tag.
-* The redex model is available at `https://github.com/atgeller/wasm-prechk`, use the `prechk-v1.2` tag.
 
 ### Other Files
 The appendix is available in `appendix.pdf`, and raw data is available under the `data` folder in this package.
@@ -70,7 +78,7 @@ Requirements:
 * `z3` version 4.12.1
 * `cargo` version nightly-2023-03-31-x86_64-unknown-linux-gnu
 * `hyperfine`
-* `python3`, along with the following packages: `numpy`, `scipy`, `pandas`, and `matplotlib`
+* `python3`, along with the following packages: `numpy`, `scipy`, `pandas`, `matplotlib`, and `uncertainties`.
 
 Full instructions:
 1. Install dependencies
@@ -120,7 +128,11 @@ Afterwards, running rustup toolchain list should should the relevant toolchain.
 
 You may need to add cargo to your path. Try `cargo --version`, and add cargo to your path if it fails.
 
-4. Copy sources
+4. Install Python dependencies
+
+`pip install numpy scipy pandas matplotlib uncertainties`
+
+5. Copy sources
 
 Make sure to place the following folders in your root directory, `~`:
 * wasmtime
@@ -131,7 +143,7 @@ Make sure to place the following folders in your root directory, `~`:
 
 The folder wasm-prechk can be used from anywhere on your machine.
 
-4. (OPTIONAL) Download sources from github instead
+5. (OPTIONAL) Download sources from github instead
 
 It's important to make sure these go into the right directories, so make sure you start in your local home directory ~ when running these commands.
 
@@ -144,7 +156,7 @@ git clone --recursive --depth 1 --branch prechk-v1.1 https://github.com/atgeller
 git clone --recurse-submodules --recursive --depth 1 --branch prechk-v1.2 https://github.com/atgeller/wasm-prechk wasm-prechk
 ```
 
-5. Build sources
+6. Build sources
 Run the following command `cargo +nightly-2023-03-31-x86_64-unknown-linux-gnu build --release` inside each of the following directories:
 ```
 ~/wasmtime
