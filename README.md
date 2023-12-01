@@ -1,6 +1,6 @@
 # Artifact Layout
 ## Appendix
-The appendix is available in `appendix.pdf` as part of this package (outside the VM), it mostly contains proof details, as well as some additional typing rules, and experimental details.
+The appendix is available in `appendix.pdf` as part of this package (outside the VM). It contains proof details, additional typing rules, and experimental details.
 
 ### Our Results for Comparison
 Raw data is available under the `data` folder as part of this package (outside the VM).
@@ -37,7 +37,7 @@ The VM image is available on Zenodo.
 
 ## Other Notes
 The folders `run_time`, `compile_time`, and `validation_time` must be present in `~/PolybenchC-4.2.1` for the scripts to work.
-The VM/Docker image should have these folders present, but if they are not then the scripts will fail.
+The VM/Docker image have these folders present.
 
 # Download, Installation, and Sanity-Testing
 ## Download
@@ -45,10 +45,10 @@ The VM/Docker image should have these folders present, but if they are not then 
 
 Use Dockerfile and compose.yaml, included as part of this artifact.
 
-### Virtual Box
+### VirtualBox
 The files `POPL2024Artifact-IndexedTypesforaStaticallySafeWebAssembly-disk001.vmdk` and `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` provide a VM image for VirtualBox, they are available as part of this package, they can be built from the dockerfile (see below), and they are accessible through zenodo: https://doi.org/10.5281/zenodo.10242132.
 
-Alternatively, run `make-virtualbox.sh` to build a new image. This builds the Virtual Box image from the Docker image, and so requires a Docker.
+Alternatively, run `make-virtualbox.sh` to build a new image. This builds the VirtualBox image from the Docker image, and so requires a Docker.
 
 ### Locally
 The artifact should work on any ubuntu:jammy machine (including a fresh virtual machine image), full installation instructions are provided below.
@@ -61,11 +61,11 @@ The appendix is available in `appendix.pdf`, and raw data is available under the
 ## Installation
 ### Docker
 Known to work with at least Docker version 4.22
- 1. Build the dockerfile provided with this package using `docker-compose build` (this will likely take a while, around half an hour, especially on less beefy machines).
- 2. Run the docker image interactively using `docker-compose run wasm-prechk`.
+1. Build the dockerfile provided with this package using `docker-compose build` (this will likely take a while, around half an hour, especially on less beefy machines).
+2. Run the docker image interactively using `docker-compose run wasm-prechk`.
 
 ### VirtualBox
-Known to work with at least Virtualbox 7.0.10
+Known to work with at least VirtualBox 7.0.10
 1. Import `POPL 2024 Artifact - Indexed Types for a Statically Safe WebAssembly.ovf` into VirtualBox using "Import Appliance".
 2. Start the virtual machine, and login using username `root` and password `root`.
    - The root password can be changed by modifying the `make-virtualbox.sh` script when generating the image.
@@ -124,7 +124,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /rustup-init.sh
 chmod +x /rustup-init.sh
 /rustup-init.sh -y --profile minimal --default-toolchain nightly-2023-03-31-x86_64-unknown-linux-gnu
 ```
-Afterwards, running rustup toolchain list should should the relevant toolchain.
+Afterwards, running rustup toolchain list should the relevant toolchain.
 
 You may need to add cargo to your path. Try `cargo --version`, and add cargo to your path if it fails.
 
@@ -223,9 +223,9 @@ You can test it on the example program `tests/wasm-prechk/bubblesort_stripped.wa
 The implementation is also used for the claims within the evaluation.
 
 ## Implementation of Call Indirect in Redex (Section 5.3)
-In section 5.3, we describe how our redex model encodes constraints on call_indirect.
+In section 5.3, we describe how our redex model encodes constraints on `call_indirect`.
 The redex model is available in `~/wasm-prechk`.
-The implementation of validation of safe call_indirect is in the `TableValidation.rkt` file, and the usage can be seen in the judgement rule for call_indirect in the `IndexTypingRules.rkt` file.
+The implementation of validation of safe `call_indirect` is in the `TableValidation.rkt` file, and the usage can be seen in the judgement rule for `call_indirect` in the `IndexTypingRules.rkt` file.
 An example test case in `Tests/IndexTableTest.rkt` demonstrates the ability of the implementation to typecheck a safe call_indirect instruction.
 
 # Section 6 - Evaluation
